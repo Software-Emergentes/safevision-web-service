@@ -1,0 +1,42 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
+  &lt;Assembly Path="C:\Users\Chizo\Videos\Diseno\AlquilaFacil-BackEnd\AlquilaFacilPlatform.Tests\obj\Release\net8.0\AlquilaFacilPlatform.Tests.dll" /&gt;&#xD;
+  &lt;Assembly Path="C:\Users\Chizo\Videos\Diseno\AlquilaFacil-BackEnd\AlquilaFacilPlatform.Tests\obj\Debug\net8.0\ref\AlquilaFacilPlatform.Tests.dll" /&gt;&#xD;
+&lt;/AssemblyExplorer&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=148cc517_002D0a25_002D4196_002Da62e_002D018968e2824d/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from Solution" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Or&gt;&#xD;
+    &lt;Not&gt;&#xD;
+      &lt;And&gt;&#xD;
+        &lt;TestAncestor&gt;&#xD;
+          &lt;TestId&gt;xUnit::FF7A0C06-D5FC-42F4-9F2E-B93E5DC6467A::net8.0::AlquilaFacilPlatform.Tests.CoreEntitiesUnitTests.ReservationTests&lt;/TestId&gt;&#xD;
+        &lt;/TestAncestor&gt;&#xD;
+        &lt;Test&gt;&#xD;
+          &lt;TestId&gt;xUnit::FF7A0C06-D5FC-42F4-9F2E-B93E5DC6467A::net8.0::AlquilaFacilPlatform.Tests.CoreEntitiesUnitTests.ReservationTests&lt;/TestId&gt;&#xD;
+          &lt;TestId&gt;xUnit::FF7A0C06-D5FC-42F4-9F2E-B93E5DC6467A::net8.0::AlquilaFacilPlatform.Tests.CoreEntitiesUnitTests.UserTests&lt;/TestId&gt;&#xD;
+          &lt;TestId&gt;xUnit::FF7A0C06-D5FC-42F4-9F2E-B93E5DC6467A::net8.0::AlquilaFacilPlatform.Tests.CoreEntitiesUnitTests.UserTests.User_Constructor_WithParameters_ShouldInitializeProperties&lt;/TestId&gt;&#xD;
+          &lt;TestId&gt;xUnit::FF7A0C06-D5FC-42F4-9F2E-B93E5DC6467A::net8.0::AlquilaFacilPlatform.Tests.CoreEntitiesUnitTests.UserTests.UpdateUsername_ShouldChangeUsername&lt;/TestId&gt;&#xD;
+          &lt;TestId&gt;xUnit::FF7A0C06-D5FC-42F4-9F2E-B93E5DC6467A::net8.0::AlquilaFacilPlatform.Tests.CoreEntitiesUnitTests.UserTests.UpdatePasswordHash_ShouldChangePasswordHash&lt;/TestId&gt;&#xD;
+          &lt;TestId&gt;xUnit::FF7A0C06-D5FC-42F4-9F2E-B93E5DC6467A::net8.0::AlquilaFacilPlatform.Tests.CoreEntitiesUnitTests.ReservationTests.Reservation_UpdateDate_ShouldUpdateProperties&lt;/TestId&gt;&#xD;
+        &lt;/Test&gt;&#xD;
+      &lt;/And&gt;&#xD;
+    &lt;/Not&gt;&#xD;
+    &lt;TestAncestor&gt;&#xD;
+      &lt;TestId&gt;xUnit::FF7A0C06-D5FC-42F4-9F2E-B93E5DC6467A::net8.0::AlquilaFacilPlatform.Tests.CoreEntitiesUnitTests.ReservationTests&lt;/TestId&gt;&#xD;
+    &lt;/TestAncestor&gt;&#xD;
+  &lt;/Or&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=3037b626_002D7c7c_002D470e_002D9f2a_002D9e7fddd6051b/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ReportTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Or&gt;&#xD;
+    &lt;And&gt;&#xD;
+      &lt;Namespace&gt;AlquilaFacilPlatform.Tests.CoreEntitiesUnitTests&lt;/Namespace&gt;&#xD;
+      &lt;Project Location="C:\Users\Chizo\Videos\Diseno\AlquilaFacil-BackEnd\AlquilaFacilPlatform.Tests" Presentation="&amp;lt;AlquilaFacilPlatform.Tests&amp;gt;" /&gt;&#xD;
+    &lt;/And&gt;&#xD;
+    &lt;And&gt;&#xD;
+      &lt;Namespace&gt;AlquilaFacilPlatform.Tests.CoreIntegrationTests&lt;/Namespace&gt;&#xD;
+      &lt;Project Location="C:\Users\Chizo\Videos\Diseno\AlquilaFacil-BackEnd\AlquilaFacilPlatform.Tests" Presentation="&amp;lt;AlquilaFacilPlatform.Tests&amp;gt;" /&gt;&#xD;
+    &lt;/And&gt;&#xD;
+  &lt;/Or&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	
+	
+	</wpf:ResourceDictionary>

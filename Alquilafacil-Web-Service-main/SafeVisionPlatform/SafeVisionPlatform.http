@@ -1,0 +1,6 @@
+@SafeVisionPlatform_HostAddress = http://localhost:5272
+
+GET {{SafeVisionPlatform_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
