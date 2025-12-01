@@ -9,12 +9,32 @@ public class TripDTO
     public int DriverId { get; set; }
     public int VehicleId { get; set; }
     public int Status { get; set; }
+    public string StatusString => Status switch
+    {
+        0 => "Initiated",
+        1 => "InProgress",
+        2 => "Completed",
+        3 => "Cancelled",
+        _ => "Unknown"
+    };
     public DateTime StartTime { get; set; }
     public DateTime? EndTime { get; set; }
     public int DurationMinutes { get; set; }
     public int AlertCount { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
+    public TripDataPolicyDTO DataPolicy { get; set; } = new TripDataPolicyDTO();
+}
+
+/// <summary>
+/// DTO para la política de datos del viaje.
+/// </summary>
+public class TripDataPolicyDTO
+{
+    public bool SyncToCloud { get; set; }
+    public int SyncIntervalMinutes { get; set; }
+    public double TotalDistanceKm { get; set; }
+    public int TotalDurationMinutes { get; set; }
 }
 
 /// <summary>
@@ -61,6 +81,7 @@ public class AlertDTO
     public string Description { get; set; } = string.Empty;
     public double? Severity { get; set; }
     public DateTime DetectedAt { get; set; }
+    public DateTime Timestamp => DetectedAt;
     public bool Acknowledged { get; set; }
 }
 

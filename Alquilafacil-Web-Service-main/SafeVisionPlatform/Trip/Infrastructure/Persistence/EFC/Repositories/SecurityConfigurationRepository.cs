@@ -15,7 +15,7 @@ public class SecurityConfigurationRepository : BaseRepository<SecurityConfigurat
     {
     }
 
-    public async Task<SecurityConfiguration?> FindByIdAsync(int id)
+    public new async Task<SecurityConfiguration?> FindByIdAsync(int id)
     {
         return await Context.Set<SecurityConfiguration>()
             .FirstOrDefaultAsync(sc => sc.Id == id);
@@ -66,7 +66,7 @@ public class SecurityConfigurationRepository : BaseRepository<SecurityConfigurat
             .ToListAsync();
     }
 
-    public async Task AddAsync(SecurityConfiguration configuration)
+    public new async Task AddAsync(SecurityConfiguration configuration)
     {
         await Context.Set<SecurityConfiguration>().AddAsync(configuration);
     }

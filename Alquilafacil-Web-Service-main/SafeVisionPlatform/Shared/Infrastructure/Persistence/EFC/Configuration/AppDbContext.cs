@@ -52,6 +52,15 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         builder.ApplyConfiguration(new CriticalNotificationConfiguration());
         builder.ApplyConfiguration(new SecurityConfigurationEntityConfiguration());
 
+        // Fatigue Monitoring Context Configuration
+        builder.ApplyConfiguration(new DrowsinessEventConfiguration());
+        builder.ApplyConfiguration(new FatigueCriticalAlertConfiguration());
+
+        // Management Context Configuration
+        builder.ApplyConfiguration(new ManagerConfiguration());
+        builder.ApplyConfiguration(new ManagementReportConfiguration());
+        builder.ApplyConfiguration(new CriticalEventConfiguration());
+
         // Apply SnakeCase Naming Convention
         builder.UseSnakeCaseWithPluralizedTableNamingConvention();
     }

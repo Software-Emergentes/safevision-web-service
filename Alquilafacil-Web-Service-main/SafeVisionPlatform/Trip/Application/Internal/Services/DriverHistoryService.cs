@@ -77,7 +77,7 @@ public class DriverHistoryService : IDriverHistoryService
         var totalAlerts = alerts.Count;
         var averageAlerts = totalTrips > 0 ? (double)totalAlerts / totalTrips : 0;
 
-        var completedTrips = trips.Where(t => t.Status == "Completed").ToList();
+        var completedTrips = trips.Where(t => t.StatusString == "Completed").ToList();
         var totalDistance = completedTrips.Sum(t => t.DataPolicy.TotalDistanceKm);
         var totalDuration = completedTrips.Sum(t => t.DataPolicy.TotalDurationMinutes);
 

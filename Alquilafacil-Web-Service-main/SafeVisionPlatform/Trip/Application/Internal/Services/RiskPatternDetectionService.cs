@@ -41,7 +41,7 @@ public class RiskPatternDetectionService : IRiskPatternDetectionService
         var trips = allTrips.Where(t =>
             t.StartTime >= request.StartDate &&
             t.StartTime <= request.EndDate &&
-            t.Status == "Completed").ToList();
+            t.StatusString == "Completed").ToList();
 
         // Obtener todas las alertas de estos viajes
         var allAlerts = new List<AlertDTO>();
@@ -55,7 +55,7 @@ public class RiskPatternDetectionService : IRiskPatternDetectionService
                 AlertType = (int)a.AlertType,
                 Description = a.Description,
                 Severity = a.Severity,
-                Timestamp = a.DetectedAt,
+                DetectedAt = a.DetectedAt,
                 Acknowledged = a.Acknowledged
             }));
         }
@@ -187,7 +187,7 @@ public class RiskPatternDetectionService : IRiskPatternDetectionService
         var trips = allTrips.Where(t =>
             t.StartTime >= startDate &&
             t.StartTime <= endDate &&
-            t.Status == "Completed").ToList();
+            t.StatusString == "Completed").ToList();
 
         var allAlerts = new List<AlertDTO>();
         foreach (var trip in trips)
@@ -198,7 +198,7 @@ public class RiskPatternDetectionService : IRiskPatternDetectionService
                 Id = a.Id,
                 TripId = a.TripId,
                 AlertType = (int)a.AlertType,
-                Timestamp = a.DetectedAt
+                DetectedAt = a.DetectedAt
             }));
         }
 
@@ -214,7 +214,7 @@ public class RiskPatternDetectionService : IRiskPatternDetectionService
         var trips = allTrips.Where(t =>
             t.StartTime >= startDate &&
             t.StartTime <= endDate &&
-            t.Status == "Completed").ToList();
+            t.StatusString == "Completed").ToList();
 
         var allAlerts = new List<AlertDTO>();
         foreach (var trip in trips)
@@ -225,7 +225,7 @@ public class RiskPatternDetectionService : IRiskPatternDetectionService
                 Id = a.Id,
                 TripId = a.TripId,
                 AlertType = (int)a.AlertType,
-                Timestamp = a.DetectedAt
+                DetectedAt = a.DetectedAt
             }));
         }
 
@@ -241,7 +241,7 @@ public class RiskPatternDetectionService : IRiskPatternDetectionService
         var trips = allTrips.Where(t =>
             t.StartTime >= startDate &&
             t.StartTime <= endDate &&
-            t.Status == "Completed").ToList();
+            t.StatusString == "Completed").ToList();
 
         var allAlerts = new List<AlertDTO>();
         foreach (var trip in trips)

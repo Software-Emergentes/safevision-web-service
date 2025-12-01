@@ -103,6 +103,12 @@ public class AlertRepository : IAlertRepository
         _context.Set<Alert>().Update(entity);
     }
 
+    public async Task UpdateAsync(Alert alert)
+    {
+        _context.Set<Alert>().Update(alert);
+        await Task.CompletedTask;
+    }
+
     public void Remove(Alert entity)
     {
         _context.Set<Alert>().Remove(entity);

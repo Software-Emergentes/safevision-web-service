@@ -10,9 +10,9 @@ namespace SafeVisionPlatform.Trip.Application.Internal.Services;
 /// </summary>
 public class AlertFeedbackService : IAlertFeedbackService
 {
-    private readonly IAlertRepository _alertRepository;
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly ILogger<AlertFeedbackService> _logger;
+    private IAlertRepository _alertRepository;
+    private IUnitOfWork _unitOfWork;
+    private ILogger<AlertFeedbackService> _logger;
 
     public AlertFeedbackService(
         IAlertRepository alertRepository,

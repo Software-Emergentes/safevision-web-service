@@ -12,6 +12,8 @@ using SafeVisionPlatform.IAM.Infrastructure.Tokens.JWT.Services;
 using SafeVisionPlatform.IAM.Interfaces.ACL;
 using SafeVisionPlatform.IAM.Interfaces.ACL.Service;
 using SafeVisionPlatform.Driver.Infrastructure.Configuration;
+using SafeVisionPlatform.FatigueMonitoring.Infrastructure.Configuration;
+using SafeVisionPlatform.Management.Infrastructure.Configuration;
 using SafeVisionPlatform.Shared.Domain.Repositories;
 using SafeVisionPlatform.Shared.Infrastructure.Interfaces.ASP.Configuration;
 using SafeVisionPlatform.Shared.Infrastructure.Persistence.EFC.Configuration;
@@ -136,6 +138,12 @@ builder.Services.AddTripBoundedContext();
 
 // Driver Bounded Context Injection Configuration
 builder.Services.AddDriverBoundedContext();
+
+// Fatigue Monitoring Bounded Context Injection Configuration
+builder.Services.AddFatigueMonitoringBoundedContext();
+
+// Management Bounded Context Injection Configuration
+builder.Services.AddManagementBoundedContext();
 
 var app = builder.Build();
 

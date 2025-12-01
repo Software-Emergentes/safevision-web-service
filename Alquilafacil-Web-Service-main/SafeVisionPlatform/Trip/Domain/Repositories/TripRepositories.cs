@@ -65,5 +65,8 @@ public interface IAlertRepository : IBaseRepository<Alert>
     /// Obtiene las alertas de un tipo específico en un rango de fechas.
     /// </summary>
     Task<IEnumerable<Alert>> GetAlertsByTypeAndDateRangeAsync(int alertType, DateTime startDate, DateTime endDate);
+
+    Task UpdateAsync(Alert alert);
+    
 }
 

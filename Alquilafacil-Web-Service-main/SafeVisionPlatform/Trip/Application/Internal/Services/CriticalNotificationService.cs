@@ -1,6 +1,7 @@
 using SafeVisionPlatform.Shared.Domain.Repositories;
 using SafeVisionPlatform.Trip.Application.Internal.DTO;
 using SafeVisionPlatform.Trip.Domain.Model.Entities;
+using SafeVisionPlatform.Trip.Domain.Model.ValueObjects;
 using SafeVisionPlatform.Trip.Domain.Repositories;
 using SafeVisionPlatform.Trip.Domain.Services;
 
@@ -119,15 +120,15 @@ public class CriticalNotificationService : ICriticalNotificationService
     {
         // Obtener el viaje
         var trip = await _tripRepository.FindByIdAsync(tripId);
-        if (trip == null || trip.Status != "InProgress")
+        if (trip == null || trip.Status != TripStatus.InProgress)
             return;
 
         // Obtener alertas del viaje actual
         var alerts = await _alertRepository.GetAlertsByTripIdAsync(tripId);
-        var criticalAlerts = alerts.Where(a => IsCriticalAlertType(a.AlertType)).ToList();
+        var criticalAlerts = alerts.Where(a => IsCriticalAlertType((int)a.AlertType)).ToList();
 
         // Si hay 3 o más alertas críticas, enviar notificación
-        if (criticalAlerts.Count >= 3)
+        if (criticalAlerts.Count() >= 3)
         {
             // Verificar si ya se envió notificación recientemente (últimos 10 minutos)
             var recentNotifications = await _notificationRepository.GetNotificationsByTripIdAsync(tripId);
@@ -138,8 +139,8 @@ public class CriticalNotificationService : ICriticalNotificationService
 
             if (!hasRecentNotification)
             {
-                var severity = DetermineSeverity(criticalAlerts.Count);
-                var message = $"ALERTA CRÍTICA: Conductor #{driverId} presenta {criticalAlerts.Count} alertas críticas de fatiga. Se requiere intervención inmediata.";
+                var severity = DetermineSeverity(criticalAlerts.Count());
+                var message = $"ALERTA CRÍTICA: Conductor #{driverId} presenta {criticalAlerts.Count()} alertas críticas de fatiga. Se requiere intervención inmediata.";
 
                 var notificationDto = new CreateCriticalNotificationDTO
                 {
@@ -147,8 +148,8 @@ public class CriticalNotificationService : ICriticalNotificationService
                     TripId = tripId,
                     ManagerId = null, // Se envía a todos los gerentes
                     Severity = severity,
-                    AlertType = criticalAlerts.Last().AlertType,
-                    CriticalAlertsCount = criticalAlerts.Count,
+                    AlertType = (int)criticalAlerts.Last().AlertType,
+                    CriticalAlertsCount = criticalAlerts.Count(),
                     Message = message,
                     Channel = "InApp"
                 };
@@ -166,12 +167,12 @@ public class CriticalNotificationService : ICriticalNotificationService
             return;
 
         // Solo enviar si el viaje está completado
-        if (trip.Status != "Completed")
+        if (trip.Status != TripStatus.Completed)
             return;
 
         // Obtener alertas del viaje
         var alerts = await _alertRepository.GetAlertsByTripIdAsync(tripId);
-        var criticalAlerts = alerts.Where(a => IsCriticalAlertType(a.AlertType)).ToList();
+        var criticalAlerts = alerts.Where(a => IsCriticalAlertType((int)a.AlertType)).ToList();
 
         // Solo enviar si NO hay alertas críticas
         if (!criticalAlerts.Any())

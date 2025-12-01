@@ -1,4 +1,5 @@
 using SafeVisionPlatform.Trip.Application.Internal.DTO;
+using SafeVisionPlatform.Trip.Domain.Model.Entities;
 using SafeVisionPlatform.Trip.Domain.Repositories;
 using SafeVisionPlatform.Trip.Domain.Services;
 
@@ -34,13 +35,13 @@ public class TripRecommendationService : ITripRecommendationService
         var statistics = new TripStatisticsDTO
         {
             TotalAlerts = alertsList.Count,
-            DrowsinessAlerts = alertsList.Count(a => a.AlertType == 0),
-            DistractionAlerts = alertsList.Count(a => a.AlertType == 1),
-            MicroSleepAlerts = alertsList.Count(a => a.AlertType == 3),
+            DrowsinessAlerts = alertsList.Count(a => a.AlertType == AlertType.Drowsiness),
+            DistractionAlerts = alertsList.Count(a => a.AlertType == AlertType.Distraction),
+            MicroSleepAlerts = alertsList.Count(a => a.AlertType == AlertType.MicroSleep),
             DurationMinutes = trip.Time.EndTime.HasValue
                 ? (int)(trip.Time.EndTime.Value - trip.Time.StartTime).TotalMinutes
                 : 0,
-            DistanceKm = trip.DataPolicy.TotalDistanceKm,
+            DistanceKm = 0,
             StartTime = trip.Time.StartTime,
             EndTime = trip.Time.EndTime
         };
@@ -78,9 +79,9 @@ public class TripRecommendationService : ITripRecommendationService
         int score = 100;
 
         // Penalizaciones por tipo de alerta
-        var drowsinessAlerts = alertsList.Count(a => a.AlertType == 0);
-        var distractionAlerts = alertsList.Count(a => a.AlertType == 1);
-        var microSleepAlerts = alertsList.Count(a => a.AlertType == 3);
+        var drowsinessAlerts = alertsList.Count(a => a.AlertType == AlertType.Drowsiness);
+        var distractionAlerts = alertsList.Count(a => a.AlertType == AlertType.Distraction);
+        var microSleepAlerts = alertsList.Count(a => a.AlertType == AlertType.MicroSleep);
 
         // Penalizar alertas críticas más severamente
         score -= drowsinessAlerts * 10;

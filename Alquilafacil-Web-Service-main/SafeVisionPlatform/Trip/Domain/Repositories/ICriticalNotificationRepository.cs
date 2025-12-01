@@ -32,4 +32,9 @@ public interface ICriticalNotificationRepository : IBaseRepository<CriticalNotif
     /// Obtiene las notificaciones críticas (no leídas o no reconocidas).
     /// </summary>
     Task<IEnumerable<CriticalNotification>> GetUnacknowledgedNotificationsAsync();
+
+    /// <summary>
+    /// Actualiza una notificación crítica.
+    /// </summary>
+    Task UpdateAsync(CriticalNotification notification);
 }

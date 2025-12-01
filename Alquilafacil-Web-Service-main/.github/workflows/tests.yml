@@ -1,0 +1,38 @@
+name: Run Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Restore dependencies (solución completa)
+      run: dotnet restore
+
+    - name: Restore CoreEntitiesUnitTests
+      run: dotnet restore AlquilaFacilPlatform.Tests/CoreEntitiesUnitTests/CoreEntitiesUnitTests.csproj
+
+    - name: Restore CoreIntegrationTests
+      run: dotnet restore AlquilaFacilPlatform.Tests/CoreIntegrationTests/CoreIntegrationTests.csproj
+
+    - name: Build all projects
+      run: dotnet build --no-restore
+
+    - name: Run CoreEntitiesUnitTests
+      run: dotnet test AlquilaFacilPlatform.Tests/CoreEntitiesUnitTests/CoreEntitiesUnitTests.csproj --no-restore --verbosity normal
+
+    - name: Run CoreIntegrationTests
+      run: dotnet test AlquilaFacilPlatform.Tests/CoreIntegrationTests/CoreIntegrationTests.csproj --no-restore --verbosity normal

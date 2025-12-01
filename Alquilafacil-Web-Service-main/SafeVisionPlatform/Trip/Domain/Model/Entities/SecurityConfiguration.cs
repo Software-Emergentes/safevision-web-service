@@ -25,7 +25,7 @@ public class SecurityConfiguration
     /// <summary>
     /// Nombre descriptivo de la configuración.
     /// </summary>
-    public string Name { get; private set; }
+    public string Name { get; private set; } = string.Empty;
 
     /// <summary>
     /// Descripción de la configuración y su propósito.

@@ -60,7 +60,7 @@ public class DriverComparisonService : IDriverComparisonService
         var allTrips = await _tripQueryService.GetTripsByDriverIdAsync(driverId);
         var trips = allTrips.Where(t => t.StartTime >= startDate && t.StartTime <= endDate).ToList();
 
-        var completedTrips = trips.Where(t => t.Status == "Completed").ToList();
+        var completedTrips = trips.Where(t => t.StatusString == "Completed").ToList();
 
         // Obtener todas las alertas de estos viajes
         var allAlerts = new List<AlertDTO>();
@@ -74,7 +74,7 @@ public class DriverComparisonService : IDriverComparisonService
                 AlertType = (int)a.AlertType,
                 Description = a.Description,
                 Severity = a.Severity,
-                Timestamp = a.DetectedAt,
+                DetectedAt = a.DetectedAt,
                 Acknowledged = a.Acknowledged
             }));
         }

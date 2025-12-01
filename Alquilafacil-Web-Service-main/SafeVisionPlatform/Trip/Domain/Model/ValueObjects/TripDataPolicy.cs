@@ -10,6 +10,8 @@ public class TripDataPolicy
     public int SyncIntervalMinutes { get; private set; }
     public bool IncludeAlerts { get; private set; }
     public bool IncludeMetrics { get; private set; }
+    public double TotalDistanceKm { get; private set; }
+    public int TotalDurationMinutes { get; private set; }
 
     public TripDataPolicy(bool syncToCloud = true, int syncIntervalMinutes = 5, bool includeAlerts = true, bool includeMetrics = true)
     {
@@ -20,6 +22,14 @@ public class TripDataPolicy
         SyncIntervalMinutes = syncIntervalMinutes;
         IncludeAlerts = includeAlerts;
         IncludeMetrics = includeMetrics;
+        TotalDistanceKm = 0;
+        TotalDurationMinutes = 0;
+    }
+
+    public void UpdateMetrics(double distanceKm, int durationMinutes)
+    {
+        TotalDistanceKm = distanceKm;
+        TotalDurationMinutes = durationMinutes;
     }
 
     /// <summary>

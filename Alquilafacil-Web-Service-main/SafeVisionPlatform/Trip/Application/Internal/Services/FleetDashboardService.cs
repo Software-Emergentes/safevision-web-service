@@ -1,5 +1,6 @@
 using SafeVisionPlatform.Trip.Application.Internal.DTO;
 using SafeVisionPlatform.Trip.Application.Internal.QueryServices;
+using SafeVisionPlatform.Trip.Domain.Model.ValueObjects;
 using SafeVisionPlatform.Trip.Domain.Repositories;
 using SafeVisionPlatform.Trip.Domain.Services;
 using SafeVisionPlatform.Trip.Interfaces.REST.Transform;
@@ -36,11 +37,11 @@ public class FleetDashboardService : IFleetDashboardService
 
         // Obtener todos los viajes activos
         var allTrips = await _tripRepository.ListAsync();
-        var activeTrips = allTrips.Where(t => t.Status == "InProgress").ToList();
+        var activeTrips = allTrips.Where(t => t.Status == TripStatus.InProgress).ToList();
 
         // Obtener viajes completados hoy
         var todayTrips = await _tripQueryService.GetTripsByDateRangeAsync(today, tomorrow);
-        var todayCompletedTrips = todayTrips.Where(t => t.Status == "Completed").ToList();
+        var todayCompletedTrips = todayTrips.Where(t => t.StatusString == "Completed").ToList();
 
         // Obtener todas las alertas de hoy
         var todayAlerts = await GetTodayAlertsAsync();
@@ -61,7 +62,7 @@ public class FleetDashboardService : IFleetDashboardService
                 DurationMinutes = (int)(DateTime.UtcNow - trip.Time.StartTime).TotalMinutes,
                 AlertCount = tripAlerts.Count,
                 CriticalAlertsCount = criticalAlerts,
-                Status = trip.Status
+                Status = trip.Status.ToString()
             };
         }).ToList();
 
@@ -75,8 +76,8 @@ public class FleetDashboardService : IFleetDashboardService
         {
             ActiveDriversCount = activeTrips.Select(t => t.DriverId).Distinct().Count(),
             ActiveTripsCount = activeTrips.Count,
-            TodayAlertsCount = todayAlerts.Count,
-            TodayCompletedTripsCount = todayCompletedTrips.Count,
+            TodayAlertsCount = todayAlerts.Count(),
+            TodayCompletedTripsCount = todayCompletedTrips.Count(),
             ActiveTrips = activeTripSummaries,
             DriversAtRisk = driversAtRisk,
             Statistics = statistics
@@ -90,7 +91,7 @@ public class FleetDashboardService : IFleetDashboardService
 
         // Obtener viajes activos
         var allTrips = await _tripRepository.ListAsync();
-        var activeTrips = allTrips.Where(t => t.Status == "InProgress").ToList();
+        var activeTrips = allTrips.Where(t => t.Status == TripStatus.InProgress).ToList();
 
         // Obtener alertas de hoy
         var todayAlerts = await GetTodayAlertsAsync();
@@ -126,7 +127,7 @@ public class FleetDashboardService : IFleetDashboardService
     {
         var trips = await _tripQueryService.GetTripsByDateRangeAsync(startDate, endDate);
         var tripsList = trips.ToList();
-        var completedTrips = tripsList.Where(t => t.Status == "Completed").ToList();
+        var completedTrips = tripsList.Where(t => t.StatusString == "Completed").ToList();
 
         // Obtener alertas en el rango de fechas
         var alerts = await GetAlertsInRangeAsync(startDate, endDate);
@@ -136,7 +137,7 @@ public class FleetDashboardService : IFleetDashboardService
         var totalAlerts = alerts.Count();
 
         var averageAlerts = completedTrips.Any()
-            ? (double)totalAlerts / completedTrips.Count
+            ? (double)totalAlerts / completedTrips.Count()
             : 0;
 
         var safeTrips = completedTrips.Count(t =>
@@ -146,7 +147,7 @@ public class FleetDashboardService : IFleetDashboardService
         });
 
         var safeTripsPercentage = completedTrips.Any()
-            ? (double)safeTrips / completedTrips.Count * 100
+            ? (double)safeTrips / completedTrips.Count() * 100
             : 0;
 
         var uniqueDrivers = tripsList.Select(t => t.DriverId).Distinct().Count();
@@ -172,7 +173,7 @@ public class FleetDashboardService : IFleetDashboardService
     {
         var allAlerts = await _alertRepository.ListAsync();
         return allAlerts
-            .Where(a => a.Timestamp >= startDate && a.Timestamp < endDate)
+            .Where(a => a.DetectedAt >= startDate && a.DetectedAt < endDate)
             .Select(a => AlertAssembler.ToDTO(a))
             .ToList();
     }
