@@ -14,9 +14,8 @@ public class DriverAggregateConfiguration : IEntityTypeConfiguration<DriverAggre
     public void Configure(EntityTypeBuilder<DriverAggregate> builder)
     {
         builder.ToTable("drivers");
-
+        
         builder.HasKey(d => d.Id);
-
         builder.Property(d => d.Id)
             .HasColumnName("id")
             .ValueGeneratedOnAdd();
@@ -48,7 +47,6 @@ public class DriverAggregateConfiguration : IEntityTypeConfiguration<DriverAggre
             c.WithOwner().HasForeignKey("Id");
             c.Property<int>("Id");
             c.HasKey("Id");
-
             c.Property(cr => cr.Username)
                 .HasColumnName("username")
                 .IsRequired();
@@ -63,7 +61,6 @@ public class DriverAggregateConfiguration : IEntityTypeConfiguration<DriverAggre
             ci.WithOwner().HasForeignKey("Id");
             ci.Property<int>("Id");
             ci.HasKey("Id");
-
             ci.Property(c => c.Phone)
                 .HasColumnName("phone")
                 .IsRequired();
@@ -75,16 +72,16 @@ public class DriverAggregateConfiguration : IEntityTypeConfiguration<DriverAggre
                 .IsRequired();
         });
 
-        // Relación con DriverProfile
-        builder.HasMany<DriverProfile>()
+        // Relación con DriverProfile (uno a uno)
+        builder.HasOne(d => d.Profile)
             .WithOne()
-            .HasForeignKey(p => p.DriverId)
+            .HasForeignKey<DriverProfile>(p => p.DriverId)
             .OnDelete(DeleteBehavior.Cascade);
 
-        // Relación con DriverLicense
-        builder.HasMany<DriverLicense>()
+        // Relación con DriverLicense (uno a uno)
+        builder.HasOne(d => d.License)
             .WithOne()
-            .HasForeignKey(l => l.DriverId)
+            .HasForeignKey<DriverLicense>(l => l.DriverId)
             .OnDelete(DeleteBehavior.Cascade);
     }
 }

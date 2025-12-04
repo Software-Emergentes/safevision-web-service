@@ -3,11 +3,17 @@ using EntityFrameworkCore.CreatedUpdatedDate.Extensions;
 using Microsoft.EntityFrameworkCore;
 using SafeVisionPlatform.IAM.Domain.Model.Aggregates;
 using SafeVisionPlatform.IAM.Domain.Model.Entities;
+using SafeVisionPlatform.Driver.Domain.Model.Aggregates;
+using SafeVisionPlatform.Driver.Domain.Model.Entities;
 
 namespace SafeVisionPlatform.Shared.Infrastructure.Persistence.EFC.Configuration;
 
 public class AppDbContext(DbContextOptions options) : DbContext(options)
 {
+    public DbSet<DriverAggregate> Drivers { get; set; } = null!;
+    public DbSet<DriverProfile> DriverProfiles { get; set; } = null!;
+    public DbSet<DriverLicense> DriverLicenses { get; set; } = null!;
+
     protected override void OnConfiguring(DbContextOptionsBuilder builder)
     {
         base.OnConfiguring(builder);

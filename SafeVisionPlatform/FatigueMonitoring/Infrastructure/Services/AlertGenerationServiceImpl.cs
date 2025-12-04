@@ -28,12 +28,17 @@ public class AlertGenerationServiceImpl : IAlertGenerationService
         IEnumerable<DrowsinessEvent> drowsinessEvents)
     {
         var eventsList = drowsinessEvents.ToList();
-
         if (!eventsList.Any())
             throw new InvalidOperationException("No hay eventos para generar alerta");
 
         var alertType = DetermineAlertType(eventsList);
-        var maxSeverity = eventsList.Max(e => e.Severity.Value);
+        
+        var maxSeverity = eventsList
+            .Where(e => e.Severity != null)
+            .Select(e => e.Severity.Value)
+            .DefaultIfEmpty(0)
+            .Max();
+    
         var severity = new SeverityScore(maxSeverity);
         var message = GenerateAlertMessage(driverId, alertType, eventsList.Count, maxSeverity);
 
@@ -67,7 +72,11 @@ public class AlertGenerationServiceImpl : IAlertGenerationService
         if (eventsList.Count(e => e.EventType == DrowsinessEventType.Yawn) >= 3)
             return CriticalAlertType.RepeatedYawning;
 
-        if (eventsList.Average(e => e.Severity.Value) >= 0.7)
+        if (eventsList
+                .Where(e => e.Severity != null)
+                .Select(e => e.Severity.Value)
+                .DefaultIfEmpty(0)
+                .Average() >= 0.7)
             return CriticalAlertType.SevereDrowsiness;
 
         if (eventsList.Count >= 3)

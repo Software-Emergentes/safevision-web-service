@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SafeVisionPlatform.Driver.Domain.Model.Aggregates;
 using SafeVisionPlatform.Driver.Domain.Repositories;
+using SafeVisionPlatform.Shared.Infrastructure.Persistence.EFC.Configuration;
+using Microsoft.EntityFrameworkCore;  
 
 namespace SafeVisionPlatform.Driver.Infrastructure.Persistence.EFC.Repositories;
 
@@ -9,9 +11,9 @@ namespace SafeVisionPlatform.Driver.Infrastructure.Persistence.EFC.Repositories;
 /// </summary>
 public class DriverRepository : IDriverRepository
 {
-    private readonly DriverDbContext _context;
+    private readonly AppDbContext _context;
 
-    public DriverRepository(DriverDbContext context)
+    public DriverRepository(AppDbContext context)
     {
         _context = context;
     }
@@ -43,6 +45,8 @@ public class DriverRepository : IDriverRepository
     public async Task<DriverAggregate?> GetByIdAsync(int driverId)
     {
         return await _context.Drivers
+            .Include(d => d.Profile)      
+            .Include(d => d.License)     
             .AsNoTracking()
             .FirstOrDefaultAsync(d => d.Id == driverId);
     }
@@ -50,6 +54,8 @@ public class DriverRepository : IDriverRepository
     public async Task<IEnumerable<DriverAggregate>> GetAllAsync()
     {
         return await _context.Drivers
+            .Include(d => d.Profile)     
+            .Include(d => d.License)      
             .AsNoTracking()
             .ToListAsync();
     }
@@ -57,6 +63,8 @@ public class DriverRepository : IDriverRepository
     public async Task<DriverAggregate?> GetByUserIdAsync(int userId)
     {
         return await _context.Drivers
+            .Include(d => d.Profile)      
+            .Include(d => d.License)    
             .AsNoTracking()
             .FirstOrDefaultAsync(d => d.UserId == userId);
     }
@@ -64,6 +72,8 @@ public class DriverRepository : IDriverRepository
     public async Task<IEnumerable<DriverAggregate>> GetByStatusAsync(int statusValue)
     {
         return await _context.Drivers
+            .Include(d => d.Profile)      
+            .Include(d => d.License)      
             .AsNoTracking()
             .Where(d => (int)d.Status.Value == statusValue)
             .ToListAsync();

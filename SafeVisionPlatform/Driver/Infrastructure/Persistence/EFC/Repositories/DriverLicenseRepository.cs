@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SafeVisionPlatform.Driver.Domain.Model.Entities;
 using SafeVisionPlatform.Driver.Domain.Repositories;
+using SafeVisionPlatform.Shared.Infrastructure.Persistence.EFC.Configuration;
 
 namespace SafeVisionPlatform.Driver.Infrastructure.Persistence.EFC.Repositories;
 
@@ -9,9 +10,9 @@ namespace SafeVisionPlatform.Driver.Infrastructure.Persistence.EFC.Repositories;
 /// </summary>
 public class DriverLicenseRepository : IDriverLicenseRepository
 {
-    private readonly DriverDbContext _context;
+    private readonly AppDbContext _context;
 
-    public DriverLicenseRepository(DriverDbContext context)
+    public DriverLicenseRepository(AppDbContext context)
     {
         _context = context;
     }
