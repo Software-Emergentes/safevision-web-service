@@ -12,7 +12,7 @@ public class SeedAdminCommandService(IUserRepository repository, IUserCommandSer
     {
         const string username = "Admin";
         const string password = "Admin@123";
-        const string email = "admin@gmail.com";
+        const string email = "admin@gmail.com"; 
         const string name = "Admin";
         const string fatherName = "FatherName";
         const string motherName = "MotherName";
