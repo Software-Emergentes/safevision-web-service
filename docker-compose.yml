@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  safevisionplatform:
+    image: safevisionplatform:0.0.1
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    restart: unless-stopped
+
