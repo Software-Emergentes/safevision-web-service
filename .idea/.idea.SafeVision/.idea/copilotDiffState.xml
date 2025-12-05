@@ -11,15 +11,6 @@
             </PendingDiffInfo>
           </value>
         </entry>
-        <entry key="$PROJECT_DIR$/README.md">
-          <value>
-            <PendingDiffInfo>
-              <option name="filePath" value="$PROJECT_DIR$/README.md" />
-              <option name="originalContent" value="&#10;" />
-              <option name="updatedContent" value="# SafeVision Platform&#10;&#10;Sistema de monitoreo de fatiga y gestión de conductores para empresas de transporte.&#10;&#10;## Requisitos del Sistema&#10;&#10;- .NET 8.0 SDK&#10;- MySQL 8.0 o superior&#10;&#10;## Configuración de Base de Datos&#10;&#10;Editar el archivo `appsettings.json` con la cadena de conexión de MySQL:&#10;&#10;```json&#10;{&#10;  &quot;ConnectionStrings&quot;: {&#10;    &quot;DefaultConnection&quot;: &quot;server=localhost;user=root;password=12345678;database=safevision&quot;&#10;  }&#10;}&#10;```&#10;&#10;## Ejecutar la Aplicación&#10;&#10;```bash&#10;cd SafeVisionPlatform&#10;dotnet run&#10;```&#10;&#10;La aplicación estará disponible en:&#10;- HTTP: http://localhost:5272&#10;- HTTPS: https://localhost:7049&#10;- Swagger UI: https://localhost:7049/swagger&#10;&#10;## Ejecutar las Pruebas&#10;&#10;Todas las pruebas:&#10;```bash&#10;cd SafeVisionPlatform.Tests&#10;dotnet test&#10;```&#10;&#10;Solo pruebas unitarias:&#10;```bash&#10;dotnet test --filter &quot;FullyQualifiedName~UnitTests&quot;&#10;```&#10;&#10;Solo pruebas de integración:&#10;```bash&#10;dotnet test --filter &quot;FullyQualifiedName~IntegrationTests&quot;&#10;```&#10;&#10;Pruebas por bounded context:&#10;```bash&#10;dotnet test --filter &quot;FullyQualifiedName~Driver&quot;&#10;dotnet test --filter &quot;FullyQualifiedName~IAM&quot;&#10;dotnet test --filter &quot;FullyQualifiedName~Trip&quot;&#10;dotnet test --filter &quot;FullyQualifiedName~Management&quot;&#10;dotnet test --filter &quot;FullyQualifiedName~FatigueMonitoring&quot;&#10;```&#10;&#10;## Estructura del Proyecto&#10;&#10;```&#10;SafeVisionPlatform/&#10;├── Driver/&#10;├── IAM/&#10;├── Trip/&#10;├── Management/&#10;├── FatigueMonitoring/&#10;└── Shared/&#10;&#10;SafeVisionPlatform.Tests/&#10;├── UnitTests/&#10;└── IntegrationTests/&#10;```" />
-            </PendingDiffInfo>
-          </value>
-        </entry>
       </map>
     </option>
   </component>

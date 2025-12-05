@@ -19,20 +19,11 @@ jobs:
       with:
         dotnet-version: '8.0.x'
 
-    - name: Restore dependencies (solución completa)
-      run: dotnet restore
+    - name: Restore dependencies
+      run: dotnet restore SafeVision.sln
 
-    - name: Restore CoreEntitiesUnitTests
-      run: dotnet restore AlquilaFacilPlatform.Tests/CoreEntitiesUnitTests/CoreEntitiesUnitTests.csproj
+    - name: Build solution
+      run: dotnet build SafeVision.sln --no-restore
 
-    - name: Restore CoreIntegrationTests
-      run: dotnet restore AlquilaFacilPlatform.Tests/CoreIntegrationTests/CoreIntegrationTests.csproj
-
-    - name: Build all projects
-      run: dotnet build --no-restore
-
-    - name: Run CoreEntitiesUnitTests
-      run: dotnet test AlquilaFacilPlatform.Tests/CoreEntitiesUnitTests/CoreEntitiesUnitTests.csproj --no-restore --verbosity normal
-
-    - name: Run CoreIntegrationTests
-      run: dotnet test AlquilaFacilPlatform.Tests/CoreIntegrationTests/CoreIntegrationTests.csproj --no-restore --verbosity normal
+    - name: Run all tests
+      run: dotnet test SafeVisionPlatform.Tests/SafeVisionPlatform.Tests.csproj --no-build --verbosity normal
