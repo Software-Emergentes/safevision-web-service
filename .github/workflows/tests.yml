@@ -23,7 +23,7 @@ jobs:
       run: dotnet restore SafeVision.sln
 
     - name: Build solution
-      run: dotnet build SafeVision.sln --no-restore
+      run: dotnet build SafeVision.sln --configuration Release --no-restore
 
     - name: Run all tests
-      run: dotnet test SafeVisionPlatform.Tests/SafeVisionPlatform.Tests.csproj --no-build --verbosity normal
+      run: dotnet test SafeVisionPlatform.Tests/SafeVisionPlatform.Tests.csproj --configuration Release --no-restore --verbosity normal
